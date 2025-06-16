@@ -1,6 +1,6 @@
 alist-win
 ======
-一个基于 [go-webview2](https://github.com/jchv/go-webview2) 的 [alist](https://github.com/Xhofe/alist) 构建
+一个基于 [go-webview2](https://github.com/jchv/go-webview2) 的 [OpenList](https://github.com/OpenListTeam/OpenList) 构建
 
 会自动检测新版并自动构建，版本检测采用 [PipeDream](https://pipedream.com)
 
