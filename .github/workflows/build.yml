@@ -23,8 +23,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          repository: 'Xhofe/alist'
-          path: alist
+          repository: 'OpenListTeam/OpenList'
+          path: openlist
           fetch-depth: 0
 
       - name: Checkout
@@ -34,23 +34,23 @@ jobs:
 
       - name: Patch (part 1)
         run: |
-          mv -f patch/*.go alist/cmd
-          mv patch/alist.syso alist
-          cat patch/go.mod.patch >> alist/go.mod
-          sed -i 's/0\.0\.0\.0/127\.0\.0\.1/g' alist/internal/conf/config.go
-          sed -i 's/linux-musl-amd64 linux-musl-arm64//g' alist/build.sh
-          sed -i 's/windows\/amd64,darwin\/amd64/windows\/amd64/g' alist/build.sh
-          sed -i 's/-w -s/-w -s -H windowsgui/g' alist/build.sh
-          sed -i 's/upx -9/upx -9 -vf --lzma --compress-icons=0/g' alist/build.sh
-          sed -i 's/alist-windows-amd64.exe/alist-windows*.exe/g' alist/build.sh
-          cd alist
+          mv -f patch/*.go openlist/cmd
+          mv patch/openlist.syso openlist
+          cat patch/go.mod.patch >> openlist/go.mod
+          sed -i 's/0\.0\.0\.0/127\.0\.0\.1/g' openlist/internal/conf/config.go
+          sed -i 's/linux-musl-amd64 linux-musl-arm64//g' openlist/build.sh
+          sed -i 's/windows\/amd64,darwin\/amd64,darwin\/arm64/windows\/amd64/g' openlist/build.sh
+          sed -i 's/-w -s/-w -s -H windowsgui/g' openlist/build.sh
+          sed -i 's/upx -9/upx -9 -vf --lzma --compress-icons=0/g' openlist/build.sh
+          sed -i 's/-windows-amd64.exe/-windows*.exe/g' openlistlist/build.sh
+          cd openlist
           go mod tidy
           echo "version=$(git describe --abbrev=0 --tags)" >> $GITHUB_ENV
           cd ..
           
       - name: Patch (part 2)
         run: |
-          sed -i 's/version="dev"/version="${{ env.version }}-dev"/g' alist/build.sh
+          sed -i 's/version="dev"/version="${{ env.version }}-dev"/g' openlist/build.sh
 
       - name: Install dependencies
         run: |
@@ -60,11 +60,11 @@ jobs:
 
       - name: Build
         run: |
-          cd alist
+          cd openlist
           bash build.sh dev
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.version }}-win
-          path: alist/dist
+          path: openlist/dist
