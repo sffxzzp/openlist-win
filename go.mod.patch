@@ -4,5 +4,4 @@ require github.com/sffxzzp/go-webview2 v0.0.0-20220506050656-17db57178327
 
 require (
 	github.com/jchv/go-winloader v0.0.0-20210711035445-715c2860da7e // indirect
-	golang.org/x/sys v0.0.0-20220503163025-988cb79eb6c6 // indirect
 )
