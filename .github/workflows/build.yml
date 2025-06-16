@@ -42,7 +42,7 @@ jobs:
           sed -i 's/windows\/amd64,darwin\/amd64,darwin\/arm64/windows\/amd64/g' openlist/build.sh
           sed -i 's/-w -s/-w -s -H windowsgui/g' openlist/build.sh
           sed -i 's/upx -9/upx -9 -vf --lzma --compress-icons=0/g' openlist/build.sh
-          sed -i 's/-windows-amd64.exe/-windows*.exe/g' openlistlist/build.sh
+          sed -i 's/-windows-amd64.exe/-windows*.exe/g' openlist/build.sh
           cd openlist
           go mod tidy
           echo "version=$(git describe --abbrev=0 --tags)" >> $GITHUB_ENV
